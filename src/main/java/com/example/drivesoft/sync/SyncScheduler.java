@@ -1,6 +1,8 @@
 package com.example.drivesoft.sync;
 
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SyncScheduler {
 
+  // Logger for logging messages
+  private static final Logger logger = LoggerFactory.getLogger(SyncScheduler.class);
+
   // Service to handle synchronization tasks
   private final SyncService syncService;
 
@@ -52,8 +57,9 @@ public class SyncScheduler {
   @PostConstruct
   @Async
   public void runOnStartupAsync() {
-    System.out.println("Running initial sync asynchronously...");
+    logger.info("Running initial sync asynchronously...");
     syncService.sync();
+    logger.info("Initial sync completed.");
   }
 
   /**
@@ -67,7 +73,8 @@ public class SyncScheduler {
    */
   @Scheduled(fixedRate = 900000) // 900000 ms = 15 minutes
   public void runSyncTask() {
-    System.out.println("Starting scheduled sync...");
+    logger.info("Scheduled sync started...");
     syncService.sync();
+    logger.info("Scheduled sync completed.");
   }
 }

@@ -4,6 +4,8 @@ import com.example.drivesoft.account.Account;
 import com.example.drivesoft.account.AccountRepository;
 import com.example.drivesoft.idms.IDMSConnectorService;
 import com.example.drivesoft.idms.objects.IDMSAccountListResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,9 @@ import java.util.function.Predicate;
 @Service
 public class SyncService {
 
+  // Logger for logging messages
+  private static final Logger logger = LoggerFactory.getLogger(SyncService.class);
+
   // Repository to handle account data access operations.
   private final AccountRepository accountRepository;
 
@@ -77,7 +82,7 @@ public class SyncService {
   public void sync() {
     // Ensures that only one sync operation runs at a time
     if (!isSyncing.compareAndSet(false, true)) {
-      System.out.println("Sync already in progress");
+      logger.info("Sync operation already in progress. Skipping this run.");
       return;
     }
     try {
@@ -85,7 +90,7 @@ public class SyncService {
       processAndSaveAccounts();
     } catch (Exception e) {
       // Log the error and handle retry logic if necessary
-      System.err.println("Sync failed: " + e.getMessage());
+      logger.error("Error occurred during sync operation: {}", e.getMessage());
     } finally {
       // Reset the syncing flag after the process is complete
       isSyncing.set(false);

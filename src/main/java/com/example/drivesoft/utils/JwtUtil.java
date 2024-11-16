@@ -134,7 +134,7 @@ public class JwtUtil {
     return Jwts.parser()
             .verifyWith(SECRET) // Verify the token signature
             .build() // Build the parser
-            .parseClaimsJws(token) // Parse the token
+            .parseSignedClaims(token) // Parse the token
             .getPayload(); // Get the token payload
   }
 
