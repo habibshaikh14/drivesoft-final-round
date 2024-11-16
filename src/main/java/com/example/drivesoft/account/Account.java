@@ -31,7 +31,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "account")
+@Table(name = "account", indexes = @Index(name = "idx_acct_id", columnList = "acct_id"))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Account {
 
@@ -113,6 +113,7 @@ public class Account {
   /**
    * Unique account ID.
    * This field is non-nullable and must be unique.
+   * It is indexed for faster retrieval.
    */
   @Column(name = "acct_id", nullable = false, unique = true)
   private String acctID;
