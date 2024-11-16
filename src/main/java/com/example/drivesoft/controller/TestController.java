@@ -1,4 +1,4 @@
-package com.example.drivesoft.controllers;
+package com.example.drivesoft.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

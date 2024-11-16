@@ -1,10 +1,9 @@
-package com.example.drivesoft.controllers;
+package com.example.drivesoft.controller;
 
 import com.example.drivesoft.model.User;
 import com.example.drivesoft.security.JwtUtil;
 import com.example.drivesoft.security.LoginRequestDTO;
-import com.example.drivesoft.services.UserDetailsServiceImpl;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.example.drivesoft.service.UserDetailsServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

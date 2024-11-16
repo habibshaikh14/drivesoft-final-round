@@ -1,5 +1,5 @@
 package com.example.drivesoft.security;
-import com.example.drivesoft.services.UserDetailsServiceImpl;
+import com.example.drivesoft.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

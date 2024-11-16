@@ -1,4 +1,4 @@
-package com.example.drivesoft.services;
+package com.example.drivesoft.service;
 
 import com.example.drivesoft.model.User;
 import com.example.drivesoft.repository.UserRepository;

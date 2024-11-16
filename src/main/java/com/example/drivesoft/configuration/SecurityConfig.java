@@ -1,4 +1,4 @@
-package com.example.drivesoft.configurations.security;
+package com.example.drivesoft.configuration;
 
 import com.example.drivesoft.security.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;

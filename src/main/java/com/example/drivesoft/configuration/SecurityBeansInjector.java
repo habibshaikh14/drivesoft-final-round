@@ -1,6 +1,6 @@
-package com.example.drivesoft.configurations.security;
+package com.example.drivesoft.configuration;
 
-import com.example.drivesoft.services.UserDetailsServiceImpl;
+import com.example.drivesoft.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
