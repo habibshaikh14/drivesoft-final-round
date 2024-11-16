@@ -19,29 +19,32 @@ public class SecurityConfig {
   private JwtAuthFilter jwtAuthFilter;
   private AuthenticationProvider authenticationProvider;
 
+  // Autowire JwtAuthFilter
   @Autowired
   public void setJwtAuthFilter(JwtAuthFilter jwtAuthFilter) {
     this.jwtAuthFilter = jwtAuthFilter;
   }
 
+  // Autowire AuthenticationProvider
   @Autowired
   public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
     this.authenticationProvider = authenticationProvider;
   }
 
+  // Define the security filter chain
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
             .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/auth/login").permitAll()
+                    .requestMatchers("/auth/login").permitAll() // Allow access to login endpoint
                     .anyRequest().authenticated() // Protect all other endpoints
             )
             .sessionManagement(sess -> sess
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No sessions
             )
             .authenticationProvider(authenticationProvider) // Custom authentication provider
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter before UsernamePasswordAuthenticationFilter
             .exceptionHandling(
                     exceptionHandling ->
                             exceptionHandling
@@ -51,7 +54,7 @@ public class SecurityConfig {
                                     .authenticationEntryPoint(
                                             (request, response, authException) ->
                                                     response.sendError(401, "Unauthorized")) // Handle unauthorized requests
-            ); // Handle unauthorized requests
+            );
 
     return http.build();
   }

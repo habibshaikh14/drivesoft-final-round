@@ -49,11 +49,11 @@ public class IDMSConnectorService {
       if (response != null && response.getStatus() == 200) {
         return response.getToken();
       } else {
-        throw new RuntimeException("Failed to fetch token. Message: " +
-                (response != null ? response.getMessage() : "No response"));
+        throw new IDMSAuthenticationException("Failed to fetch token. Message: " +
+                (response != null ? response.getMessage() : "No response from IDMS"));
       }
     } catch (Exception e) {
-      throw new RuntimeException("Failed to fetch authentication token: " + e.getMessage(), e);
+      throw new IDMSAuthenticationException("Error during authentication: " + e.getMessage(), e);
     }
   }
 
@@ -71,12 +71,11 @@ public class IDMSConnectorService {
       if (response != null && Integer.parseInt(response.getStatus()) == 200) {
         return response;
       } else {
-        throw new RuntimeException("Failed to fetch account list. Message: " +
-                (response != null ? response.getMessage() : "No response"));
+        throw new IDMSAccountListException("Failed to fetch account list. Message: " +
+                (response != null ? response.getMessage() : "No response from IDMS"));
       }
     } catch (Exception e) {
-      throw new RuntimeException("Failed to fetch account list: " + e.getMessage(), e);
+      throw new IDMSAccountListException("Error during account list fetch: " + e.getMessage(), e);
     }
-
   }
 }

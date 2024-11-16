@@ -16,31 +16,37 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @Component
 public class AppConfig {
+
+  // Bean for password encoding using BCrypt
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder(); // Password encoding
   }
 
+  // Bean for authentication provider using DAO authentication
   @Bean
   public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    authenticationProvider.setUserDetailsService(userDetailsService());
-    authenticationProvider.setPasswordEncoder(passwordEncoder());
+    authenticationProvider.setUserDetailsService(userDetailsService()); // Set custom UserDetailsService
+    authenticationProvider.setPasswordEncoder(passwordEncoder()); // Set password encoder
     return authenticationProvider;
   }
 
+  // Bean for authentication manager
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
+    return config.getAuthenticationManager(); // Get authentication manager from configuration
   }
 
+  // Bean for custom UserDetailsService implementation
   @Bean
   public UserDetailsService userDetailsService() {
     return new UserDetailsServiceImpl(); // Ensure UserInfoService implements UserDetailsService
   }
 
+  // Bean for RestTemplate to perform REST operations
   @Bean
   public RestTemplate restTemplate() {
-    return new RestTemplate();
+    return new RestTemplate(); // Create a new RestTemplate instance
   }
 }
