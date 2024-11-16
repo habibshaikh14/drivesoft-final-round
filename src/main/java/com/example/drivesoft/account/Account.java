@@ -22,6 +22,9 @@ public class Account {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Version
+  private Long version;
+
   @Column(name = "contract_sales_price")
   private BigDecimal contractSalesPrice;
 

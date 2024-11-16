@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class AccountController {
     this.accountService = accountService;
   }
 
-  @GetMapping("/getAll")
-  public ResponseEntity<List<Account>> getAllAccounts() {
-    return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
+  @GetMapping("/fetchAll")
+  public ResponseEntity<List<Account>> fetchAllAccounts(
+          @RequestParam(value = "sync", required = false, defaultValue = "false") boolean sync
+  ) {
+    return new ResponseEntity<>(accountService.fetchAllAccounts(sync), HttpStatus.OK);
   }
 }
