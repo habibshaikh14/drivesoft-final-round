@@ -34,16 +34,25 @@ public class SecurityConfig {
     http
             .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/login").permitAll()
+                    .requestMatchers("/auth/login").permitAll()
                     .anyRequest().authenticated() // Protect all other endpoints
             )
             .sessionManagement(sess -> sess
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No sessions
             )
             .authenticationProvider(authenticationProvider) // Custom authentication provider
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
+            .exceptionHandling(
+                    exceptionHandling ->
+                            exceptionHandling
+                                    .accessDeniedHandler(
+                                            (request, response, accessDeniedException) ->
+                                                    response.sendError(403, "Forbidden")) // Handle forbidden requests
+                                    .authenticationEntryPoint(
+                                            (request, response, authException) ->
+                                                    response.sendError(401, "Unauthorized")) // Handle unauthorized requests
+            ); // Handle unauthorized requests
 
     return http.build();
   }
-
 }

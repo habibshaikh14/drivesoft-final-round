@@ -1,7 +1,5 @@
 package com.example.drivesoft.auth;
 
-import com.example.drivesoft.user.User;
-import com.example.drivesoft.user.UserDetailsServiceImpl;
 import com.example.drivesoft.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +30,7 @@ public class AuthController {
     Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
     );
+
     if (authentication.isAuthenticated()) {
       LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
       loginResponseDTO.setUsername(authRequest.getUsername());
@@ -41,5 +40,4 @@ public class AuthController {
       throw new UsernameNotFoundException("Invalid user request!");
     }
   }
-
 }

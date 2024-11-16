@@ -36,5 +36,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     repository.save(userInfo);
     return "User Added Successfully";
   }
-
 }

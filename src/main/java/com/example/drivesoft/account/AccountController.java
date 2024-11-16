@@ -22,5 +22,4 @@ public class AccountController {
   public ResponseEntity<List<Account>> getAllAccounts() {
     return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
   }
-
 }
