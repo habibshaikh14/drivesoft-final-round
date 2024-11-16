@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DrivesoftApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DrivesoftApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(DrivesoftApplication.class, args);
+  }
 
 }

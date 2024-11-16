@@ -1,8 +1,5 @@
-package com.example.drivesoft.service;
+package com.example.drivesoft.user;
 
-import com.example.drivesoft.model.User;
-import com.example.drivesoft.repository.UserRepository;
-import com.example.drivesoft.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

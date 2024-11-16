@@ -1,4 +1,4 @@
-package com.example.drivesoft.security;
+package com.example.drivesoft.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

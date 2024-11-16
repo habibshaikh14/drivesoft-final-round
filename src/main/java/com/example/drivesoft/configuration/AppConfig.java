@@ -1,6 +1,6 @@
 package com.example.drivesoft.configuration;
 
-import com.example.drivesoft.service.UserDetailsServiceImpl;
+import com.example.drivesoft.user.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,10 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @Component
-public class SecurityBeansInjector {
+public class AppConfig {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder(); // Password encoding
@@ -36,5 +37,10 @@ public class SecurityBeansInjector {
   @Bean
   public UserDetailsService userDetailsService() {
     return new UserDetailsServiceImpl(); // Ensure UserInfoService implements UserDetailsService
+  }
+
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
   }
 }

@@ -1,12 +1,7 @@
-package com.example.drivesoft.security;
+package com.example.drivesoft.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +13,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-  private static final SecretKey  SECRET = Jwts.SIG.HS256.key().build();
+  private static final SecretKey SECRET = Jwts.SIG.HS256.key().build();
   private static final int EXPIRATION_TIME = 1000 * 60 * 30; // 30 minutes
 
   public String generateToken(String userName) {

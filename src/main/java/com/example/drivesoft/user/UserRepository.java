@@ -1,6 +1,5 @@
-package com.example.drivesoft.repository;
+package com.example.drivesoft.user;
 
-import com.example.drivesoft.model.User;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
